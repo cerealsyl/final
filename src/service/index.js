@@ -31,9 +31,23 @@ export default class Service {
 
     createUser = user => {
         this.users.push(user)
+        return this.users
     }
 
     findAllUsers = () => {
         return this.users
+    }
+
+    validateUser = (email, password) => {
+        console.log("service")
+
+        for(let i = 0; i < this.users.length; i++) {
+            if(this.users[i].email === email && this.users[i].password === password) {
+                return true
+            }else{
+                return false
+            }
+        }
+
     }
 }

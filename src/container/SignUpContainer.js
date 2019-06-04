@@ -3,13 +3,15 @@ import SignUp from '../component/SignUp'
 
 
 const stateToPropertyMapper = (state) => ({
+    users: state.SignUpReducer.users
 
 });
 
 const dispatchToPropertyMapper = (dispatch) => ({
-    userSignUpRequest: (userData) => {
+    register: (user) => {
         dispatch({
-            type: "USER_SIGN_UP"
+            type: "REGISTER_USER",
+            user: user
         })
     }
 

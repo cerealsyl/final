@@ -14,6 +14,7 @@ const emailValidation = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props)
         this.state = {
             name: "",
             password: "",
@@ -33,7 +34,14 @@ class SignUp extends React.Component {
         event.preventDefault();
 
         if(formValid(this.state.formErrors)) {
-            console.log(name, password, email, userType)
+            const user = {
+                name: name,
+                password: password,
+                email: email,
+                userType: userType
+            }
+            this.props.register(user)
+            this.props.history.push('/sign-in')
         }else{
             console.log("form invalid")
         }
@@ -65,7 +73,7 @@ class SignUp extends React.Component {
         }
         this.setState({
             formErrors, [name]: value
-        }, () => console.log(this.state))
+        })
 
     }
 
@@ -76,7 +84,7 @@ class SignUp extends React.Component {
         return(
             <div className="login-page">
                 <div className="form">
-                <form className="register-form" onSubmit={this.handleSubmit} noValidate>
+                <form className="register-form" noValidate>
                     <input
                         onChange={this.handleChange}
                         value={this.state.name}
@@ -116,7 +124,7 @@ class SignUp extends React.Component {
                         value="writer"/>bookie who writes
 
                     <Link to="/sign-in">
-                        <button type="submit" className="mt-2">Create</button>
+                        <button onClick={this.handleSubmit} type="submit" className="mt-2">Create</button>
                     </Link>
                     <div className="mt-2">Already a bookie
                         <Link to="/sign-in"> Log in!</Link>

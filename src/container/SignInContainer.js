@@ -2,18 +2,18 @@ import { connect } from 'react-redux'
 import SignIn from "../component/SignIn";
 
 const stateToPropertyMapper = (state) => ({
+    users: state.SignInReducer.users,
+    message: state.SignInReducer.message
 
 });
 
 const dispatchToPropertyMapper = (dispatch) => ({
-    signIn: (name, password, email, userType) => {
+    validateUser: (email, password) => {
         dispatch({
-            type: "REGISTER_PENDING",
-            name: name,
-            password: password,
+            type: "VALIDATE_USER",
             email: email,
-            userType: userType
-        });
+            password: password
+        })
     }
 
 });
