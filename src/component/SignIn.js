@@ -5,46 +5,43 @@ class SignIn extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: "",
-            isLoggedIn: true
         }
     }
 
-    handleEmailInput = event => {
+    handleUsernameInput = event => {
         this.setState({
-            email: event.currentTarget.value,
-            isLoggedIn: true
+            username: event.currentTarget.value,
         })
     };
 
     handlePasswordInput = event => {
         this.setState({
             password: event.currentTarget.value,
-            isLoggedIn: true
         })
     };
     validateUser = () => {
-        this.props.validateUser(this.state.email, this.state.password)
-        console.log(this.props)
-        if(this.props.message === false) {
-            console.log("here")
-            this.setState({
-                isLoggedIn: false
-            })
-        }else{
-            this.props.history.push('/')
+        // this.props.validateUser(this.state.username, this.state.password)
+        console.log(this.state.username, this.props)
+        if(this.state.username === 'alice') {
+            this.props.history.push('/profile')
+        } else {
+
         }
     }
 
 
     render() {
-        let error = ""
-        if(! this.state.isLoggedIn) {
+        let error = "";
+        let direct = "";
+        console.log("loggedInFail", this.props.loggedInFail)
+        if(this.props.loggedInFail) {
             error = <div className="alert alert-danger" role="alert">
-                This is a danger alert—check it out!</div>
+                Log in failed, please try again</div>
         } else {
             error = <div></div>
+            direct = `/profile/:id`
         }
 
         return(
@@ -53,18 +50,24 @@ class SignIn extends React.Component {
                     <form className="login-form">
                         {error}
                         <input
-                            onChange={event => this.handleEmailInput(event)}
-                            value={this.state.email}
+                            onChange={event => {
+                                this.handleUsernameInput(event)
+
+                            }}
+                            value={this.state.username}
                             type="text"
-                            placeholder="email"/>
+                            placeholder="username"/>
                         <input
                             onChange={event => this.handlePasswordInput(event)}
                             value={this.state.password}
                             type="password"
                             placeholder="password"/>
-                        <Link to={"/profile"}>
-                            <button onClick={this.validateUser}>Log in</button>
-                        </Link>
+                        {/*<Link to={direct}>*/}
+                            <button type="button" onClick={(event)=>{
+                                event.preventDefault()
+                                this.validateUser()
+                            }}>Log in</button>
+                        {/*</Link>*/}
                         <div className="mt-2">Not a bookie yet?
                             <Link to="/register"> Register!</Link>
                         </div>

@@ -8,11 +8,27 @@ import Result from './Result';
 import DisplayContent from "./DisplayContent";
 import UserProfile from "./UserProfile";
 
-
+const PrivateRoute = ({component: Component, ...rest}) =>  {console.log("rest", rest.loggedInFail)
+    return (
+    <Route render={(rest) => (
+        rest.loggedInFail === false ? (console.log("user log in")): (console.log("user did not log in"))
+    )}/>
+)}
 
 class Home extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            loggedInFail: this.props.loggedInFail
+        }
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log(nextProps)
+        if(this.props !== nextProps) {
+            this.setState({
+                loggedInFail: this.props.loggedInFail
+            })
+        }
     }
 
 
@@ -26,7 +42,8 @@ class Home extends React.Component {
                     <Route path="/register" component={SignUpContainer}/>
                     <Route path="/search" component={Result}/>
                     <Route path="/details/:bookId" component={DisplayContent}/>
-                    <Route path="/profile" component={UserProfile}/>
+                    {/*<PrivateRoute path='/profile' component={UserProfile} loggedInFail={this.state.loggedInFail}/>*/}
+                    <Route path='/profile' component={UserProfile}/>
                 </div>
 
             </Router>

@@ -1,15 +1,18 @@
 import Service from '../service'
 
-let service = Service.getInstance();
-const users = service.findAllUsers();
 
-const SignInReducer = (state = {users: users, message: null}, action) => {
+
+const SignInReducer = (state = {users: [], loggedInFail: false}, action) => {
     switch(action.type) {
-        case "VALIDATE_USER":
-            console.log("in reducer")
-            let message = service.validateUser(action.email, action.password);
-            console.log(message)
-            return {users: state.users, message: message}
+        // case "VALIDATE_USER":
+            // if(message === true) {
+            //     const newLoggedInFail = false
+            //     return {users: state.users, loggedInFail: newLoggedInFail}
+            // }else{
+            //     console.log("there")
+            //     return {users: state.users, loggedInFail: true}
+            // }
+
 
         default:
             return state

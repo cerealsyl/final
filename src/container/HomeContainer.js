@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import Home from "../component/Home";
 
 
-const stateToPropertyMapper = (state) => ({
-
+const stateToPropertyMapper = (state) => console.log("state", state) || ({
+    loggedInFail: state.SignInReducer.loggedInFail
 });
 
 const dispatchToPropertyMapper = (dispatch) => ({

@@ -1,15 +1,9 @@
-import Service from '../service'
 
-let service = Service.getInstance();
-const users = service.findAllUsers();
 
-const SignUpReducer = (state = {users: users}, action) => {
+const SignUpReducer = (state = {message: null}, action) => {
     switch(action.type) {
-        case "REGISTER_USER":
-            const newState = service.createUser(action.user);
-            console.log(newState)
-            return {users: newState}
-
+        case "REGISTER_USER_FULFILLED":
+            return {message: action.message}
         default:
             return state
     }

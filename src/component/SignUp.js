@@ -16,12 +16,12 @@ class SignUp extends React.Component {
         super(props);
         console.log(props)
         this.state = {
-            name: "",
+            username: "",
             password: "",
             email: "",
             userType: "",
             formErrors: {
-                name: "",
+                username: "",
                 password: "",
                 email: "",
                 userType: "",
@@ -30,18 +30,18 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = event =>{
-        const {name, password, email, userType} = this.state
+        const {username, password, email, userType} = this.state
         event.preventDefault();
 
         if(formValid(this.state.formErrors)) {
             const user = {
-                name: name,
+                username: username,
                 password: password,
                 email: email,
                 userType: userType
             }
+            console.log("user", user)
             this.props.register(user)
-            this.props.history.push('/sign-in')
         }else{
             console.log("form invalid")
         }
@@ -59,11 +59,11 @@ class SignUp extends React.Component {
         const {name, value} = e.target;
         let formErrors = this.state.formErrors;
         switch(name) {
-            case "name":
-                formErrors.name = value.length < 3 && value.length > 0 ? "minimum three characters required" : ""
+            case "username":
+                formErrors.username = value.length < 3 && value.length > 0 ? "minimum three characters required" : ""
                 break;
             case "password":
-                formErrors.name = value.length < 6 && value.length > 0 ? "minimum six characters required" : ""
+                formErrors.password = value.length < 6 && value.length > 0 ? "minimum six characters required" : ""
                 break;
             case "email":
                 formErrors.email = emailValidation.test(value) && value.length > 0 ? "" : "Invalid Email Address"
@@ -77,22 +77,37 @@ class SignUp extends React.Component {
 
     }
 
+    createUserSuccess = () => {
+        this.props.history.push('/sign-in')
+
+    }
+
 
 
     render() {
-        const { formErrors } = this.state
+        const { formErrors } = this.state;
+
+        if(this.props.message === "Register failed") {
+
+            return  <div className="alert alert-danger" role="alert">hey
+                </div>
+        }else if(this.props.message === "Register succeed") {
+            return <div className="alert alert-success" role="alert">yo
+            </div> && setTimeout(this.createUserSuccess, 10000)
+
+        }
         return(
             <div className="login-page">
                 <div className="form">
                 <form className="register-form" noValidate>
                     <input
                         onChange={this.handleChange}
-                        value={this.state.name}
+                        value={this.state.username}
                         type="text"
-                        name="name"
+                        name="username"
                         formNoValidate
-                        placeholder="name"/>
-                    {formErrors.name.length > 0 && <span className="errorMessage">{formErrors.name}</span>}
+                        placeholder="username"/>
+                    {formErrors.username.length > 0 && <span className="errorMessage">{formErrors.name}</span>}
 
                     <input
                         onChange={this.handleChange}
@@ -115,17 +130,15 @@ class SignUp extends React.Component {
                         type="radio"
                         name="user-type"
                         formNoValidate
-                        value="viewer"/>bookie who reads
+                        value="VIEWER"/>bookie who reads
                     <input
                         onChange={this.handleChange}
                         type="radio"
                         name="user-type"
                         formNoValidate
-                        value="writer"/>bookie who writes
+                        value="WRITER"/>bookie who writes
 
-                    <Link to="/sign-in">
-                        <button onClick={this.handleSubmit} type="submit" className="mt-2">Create</button>
-                    </Link>
+                    <button onClick={this.handleSubmit} type="submit" className="mt-2">Create</button>
                     <div className="mt-2">Already a bookie
                         <Link to="/sign-in"> Log in!</Link>
                     </div>

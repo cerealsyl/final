@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import SignIn from "../component/SignIn";
 
 const stateToPropertyMapper = (state) => ({
-    users: state.SignInReducer.users,
-    message: state.SignInReducer.message
+    user: state.SignInReducer.users,
+    loggedInFail: state.SignInReducer.loggedInFail
+
 
 });
 
