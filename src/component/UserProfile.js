@@ -37,6 +37,7 @@ class UserProfile extends React.Component {
               BookList:
             </h3>
             <ul className='list-group'>
+
               {/*uncomment the following code once you can get user data from database*/}
               {/*{this.state.user.bookList.map(book => <li className='list-group-item'>*/}
               {/*  book*/}
