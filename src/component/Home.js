@@ -43,7 +43,8 @@ class Home extends React.Component {
                     <Route path="/search" component={Result}/>
                     <Route path="/details/:bookId" component={DisplayContent}/>
                     {/*<PrivateRoute path='/profile' component={UserProfile} loggedInFail={this.state.loggedInFail}/>*/}
-                    <Route path='/profile' component={UserProfile}/>
+                    {/*{<Route path='profile' component={UserProfile}/>}*/}
+                    <Route path='/profile/:username' component={UserProfile}/>
                 </div>
 
             </Router>
