@@ -6,8 +6,9 @@ import Service from '../service'
 const service = new Service();
 
 
-const stateToPropertyMapper = (state) => console.log(state.SignUpReducer.message) || ({
-    message: state.SignUpReducer.message
+const stateToPropertyMapper = (state) => ({
+    fail: state.SignUpReducer.fail,
+    success: state.SignUpReducer.success
 
 });
 
@@ -18,18 +19,22 @@ const dispatchToPropertyMapper = (dispatch) => ({
             user: user
         });
         service.createUser(user)
-            .then(message => {
+            .then(response => {
+                if (!response.ok) throw new Error()
                 dispatch({
                     type: "REGISTER_USER_FULFILLED",
-                    message: message
                 })
             })
             .catch(err => {
                 dispatch({
                     type: "REGISTER_USER_REJECTED",
-                    err: err
                 })
             })
+    },
+    reset: () => {
+        dispatch({
+            type: "RESET_REGISTER_USER"
+        })
     }
 
 });
