@@ -3,7 +3,6 @@
 const initialState = {success: null, fail: null}
 
 const SignUpReducer = (state = initialState, action) => {
-    console.log(action)
     switch(action.type) {
         case "REGISTER_USER_FULFILLED":
             return {success: "success", fail: state.fail}

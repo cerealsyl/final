@@ -1,5 +1,5 @@
 let users = '/api/users'
-let username = '/api/users/username/{USERNAME}'
+let login = '/api/login'
 
 
 
@@ -17,11 +17,15 @@ export default class Service {
 
     };
 
-    findUserByUsername = (username) => {
-        return fetch(username.replace("USERNAME", username))
-            .then(response => {
-                return response.json
-            })
+    validateUser = (username, password) => {
+        return fetch(login, {
+            method: 'POST',
+            body: JSON.stringify({username: username, password: password}),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+
     };
 
     createUser = (user) => {
@@ -33,7 +37,10 @@ export default class Service {
             }
         })
 
-    }
+    };
+
+
+
 }
 
 

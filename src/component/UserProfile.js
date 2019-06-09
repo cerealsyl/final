@@ -7,6 +7,9 @@ class UserProfile extends React.Component {
         super(props)
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+    }
 
     render() {
       return(
