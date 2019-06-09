@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import WidgetListContainer from '../container/WidgetListContainer'
+import BookListItem from "./BookListItem";
 
 
 class UserProfile extends React.Component {
@@ -87,9 +88,9 @@ class UserProfile extends React.Component {
                             <ul className='list-group'>
 
                                 {this.props.user.bookList.map((book, index) =>
-                                    <li key={index} className='list-group-item'>
-                                        {book.title}
-                                    </li>
+                                    <BookListItem
+                                    book={book}
+                                    key={index}/>
                                 )}
                             </ul>
                         </div>}

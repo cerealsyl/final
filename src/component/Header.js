@@ -21,13 +21,13 @@ class Header extends React.Component {
                 <div className="col-4 float-right">
                     <div className="row">
 
-                        <div className={`${window.location.pathname === '/profile' ? "invisible" : "visible"} mt-2 btn btn-success col-3`}>
+                        <div className={`${window.location.pathname === '/myprofile' ? "invisible" : "visible"} mt-2 btn btn-success col-3`}>
                             <Link to="/sign-in" className="color-white">Sign In</Link>
                         </div>
-                        <div className={`${window.location.pathname === '/profile' ? "invisible" : "visible"} mt-2 ml-2 btn btn-success col-3 color-white`}>
+                        <div className={`${window.location.pathname === '/myprofile' ? "invisible" : "visible"} mt-2 ml-2 btn btn-success col-3 color-white`}>
                             <Link to="/register" className="color-white">Sign up</Link>
                         </div>
-                        <div className={`${window.location.pathname === '/profile' ? "visible" : "invisible"} mt-2 btn btn-success col-3 color-white`}>
+                        <div onClick={this.props.logout} className={`${window.location.pathname === '/myprofile' ? "visible" : "invisible"} mt-2 btn btn-warning col-3 color-white`}>
                             <Link to="/" className="color-white">Log out</Link>
                         </div>
 

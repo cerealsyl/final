@@ -8,6 +8,7 @@ import Result from './Result';
 import DisplayContent from "./DisplayContent";
 import UserProfile from "./UserProfile";
 import UserProfileContainer from '../container/ProfileContainer'
+import UserProfilePublicContainer from "../container/UserProfilePublicContainer";
 
 
 class Home extends React.Component {
@@ -37,7 +38,7 @@ class Home extends React.Component {
                     <Route path="/search" component={Result}/>
                     <Route path="/details/:bookId" component={DisplayContent}/>
                     <Route path='/myprofile' component={UserProfileContainer}/>
-                    <Route path='/profile/:username' component={UserProfile}/>
+                    <Route path='/profile/userId' component={UserProfilePublicContainer}/>
                 </div>
 
             </Router>

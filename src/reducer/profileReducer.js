@@ -6,7 +6,7 @@ const user = {
     email: "siyang@gmail.com",
     firstname: "",
     lastname: "",
-    userType: "WRITER",
+    userType: "VIEWER",
     bookList: [
         {
             title: "harry",
