@@ -57,7 +57,6 @@ class SignUp extends React.Component {
 
     handleChange = e => {
         e.preventDefault();
-        console.log("target", e.target)
         const {name, value} = e.target;
         let formErrors = this.state.formErrors;
         switch(name) {

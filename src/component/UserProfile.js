@@ -5,15 +5,8 @@ const service = new Service();
 class UserProfile extends React.Component {
     constructor(props) {
         super(props)
-      const pathname = window.location.pathname
-      const paths = pathname.split('/')
-      this.username = paths[2]
-      console.log(this.username + " in profile")
-
-      this.state = {
-        user: service.findUserByUsername(this.username)
-      }
     }
+
 
     render() {
       return(

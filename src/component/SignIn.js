@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class SignIn extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             username: "",
@@ -22,33 +22,33 @@ class SignIn extends React.Component {
         })
     };
     validateUser = () => {
-        // this.props.validateUser(this.state.username, this.state.password)
-        console.log(this.state.username, this.props)
-        if(this.state.username === 'alice') {
-            this.props.history.push('/profile')
-        } else {
-
-        }
+        this.props.validateUser(this.state.username, this.state.password)
+        //  this.props.validateUser(this.state.username, this.state.password)
+        // console.log(this.state.username, this.props)
+        // if (this.state.username === 'alice') {
+        //     this.props.history.push('/profile')
+        // } else {
+        //
+        // }
     }
 
 
     render() {
         let error = "";
-        let direct = "";
         console.log("loggedInFail", this.props.loggedInFail)
-        if(this.props.loggedInFail) {
-            error = <div className="alert alert-danger" role="alert">
+        if (this.props.loggedInFail) {
+            error = <div className="alert alert-danger mt-5" role="alert">
                 Log in failed, please try again</div>
-        } else {
-            error = <div></div>
-            direct = `/profile/:id`
+        } else if (this.props.loggedIn) {
+            setTimeout(()=> this.props.history.push('/profile'), 500);
+            
         }
 
-        return(
+        return (
             <div className="login-page">
                 <div className="form">
+                    {error}
                     <form className="login-form">
-                        {error}
                         <input
                             onChange={event => {
                                 this.handleUsernameInput(event)
@@ -62,12 +62,11 @@ class SignIn extends React.Component {
                             value={this.state.password}
                             type="password"
                             placeholder="password"/>
-                        {/*<Link to={direct}>*/}
-                            <button type="button" onClick={(event)=>{
-                                event.preventDefault()
-                                this.validateUser()
-                            }}>Log in</button>
-                        {/*</Link>*/}
+                        <button type="button" onClick={(event) => {
+                            event.preventDefault()
+                            this.validateUser()
+                        }}>Log in
+                        </button>
                         <div className="mt-2">Not a bookie yet?
                             <Link to="/register"> Register!</Link>
                         </div>
