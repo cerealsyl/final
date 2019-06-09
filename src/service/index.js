@@ -32,19 +32,6 @@ export default class Service {
                 'content-type': 'application/json'
             }
         })
-            .then(response => {
-                return response.json()
-            })
-            .then(json => {
-                console.log("json", json)
-                if(json === false){
-                    return "Register failed"
-                }else{
-                    return "Register succeed"
-                }
-            })
-
-
 
     }
 }

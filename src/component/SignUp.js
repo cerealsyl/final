@@ -54,8 +54,10 @@ class SignUp extends React.Component {
         // })
     }
 
+
     handleChange = e => {
         e.preventDefault();
+        console.log("target", e.target)
         const {name, value} = e.target;
         let formErrors = this.state.formErrors;
         switch(name) {
@@ -74,30 +76,32 @@ class SignUp extends React.Component {
         this.setState({
             formErrors, [name]: value
         })
-
     }
 
-    createUserSuccess = () => {
-        this.props.history.push('/sign-in')
-
+    handleUserType = event => {
+        this.setState({
+            userType: event.currentTarget.value
+        })
     }
 
 
 
     render() {
         const { formErrors } = this.state;
+        let errorMessage = ""
 
-        if(this.props.message === "Register failed") {
-
-            return  <div className="alert alert-danger" role="alert">hey
-                </div>
-        }else if(this.props.message === "Register succeed") {
-            return <div className="alert alert-success" role="alert">yo
-            </div> && setTimeout(this.createUserSuccess, 10000)
+        if(this.props.fail) {
+            errorMessage = <div className="alert alert-danger text-center mt-5" role="alert">{this.props.fail}</div>
+        }else if (this.props.success) {
+            setTimeout(() => {
+                this.props.history.push('/sign-in')
+                this.props.reset();
+            }, 500)
 
         }
         return(
             <div className="login-page">
+                {errorMessage}
                 <div className="form">
                 <form className="register-form" noValidate>
                     <input
@@ -126,16 +130,14 @@ class SignUp extends React.Component {
                         placeholder="email address"/>
                     {formErrors.email.length > 0 && <span className="errorMessage">{formErrors.email}</span>}
                     <input
-                        onChange={this.handleChange}
+                        onChange={e => this.handleUserType(e)}
                         type="radio"
                         name="user-type"
-                        formNoValidate
                         value="VIEWER"/>bookie who reads
                     <input
-                        onChange={this.handleChange}
+                        onChange={e => this.handleUserType(e)}
                         type="radio"
                         name="user-type"
-                        formNoValidate
                         value="WRITER"/>bookie who writes
 
                     <button onClick={this.handleSubmit} type="submit" className="mt-2">Create</button>
