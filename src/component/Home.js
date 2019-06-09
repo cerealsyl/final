@@ -4,11 +4,9 @@ import Header from "./Header";
 import SearchBar from "./SearchBar";
 import SignInContainer from "../container/SignInContainer";
 import SignUpContainer from "../container/SignUpContainer"
-import Result from './Result';
-import DisplayContent from "./DisplayContent";
-import UserProfile from "./UserProfile";
 import UserProfileContainer from '../container/ProfileContainer'
 import UserProfilePublicContainer from "../container/UserProfilePublicContainer";
+import SearchDetail from './SearchDetail';
 
 
 class Home extends React.Component {
@@ -35,10 +33,9 @@ class Home extends React.Component {
                     <Route exact path="/" component={SearchBar}/>
                     <Route path="/sign-in" component={SignInContainer}/>
                     <Route path="/register" component={SignUpContainer}/>
-                    <Route path="/search" component={Result}/>
-                    <Route path="/details/:bookId" component={DisplayContent}/>
                     <Route path='/myprofile' component={UserProfileContainer}/>
-                    <Route path='/profile/userId' component={UserProfilePublicContainer}/>
+                    <Route path='/profile/:userId' component={UserProfilePublicContainer}/>
+                    <Route path="/search/:bookId" render={() => <SearchDetail/>}/>
                 </div>
 
             </Router>

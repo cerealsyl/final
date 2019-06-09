@@ -18,8 +18,8 @@
 
 
 .center {
-    margin-top: 350px !important;
-    margin-left: 80px !important;
+    margin-top: 100px !important;;
+    margin-left: 83px !important;
 }
 
 .login-page {
@@ -72,6 +72,9 @@
     color: darkred;
 }
 
+.mt-350 {
+    margin-top: 350px !important;
+}
 
 
 
