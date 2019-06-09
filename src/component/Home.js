@@ -7,6 +7,7 @@ import SignUpContainer from "../container/SignUpContainer"
 import Result from './Result';
 import DisplayContent from "./DisplayContent";
 import UserProfile from "./UserProfile";
+import UserProfileContainer from '../container/ProfileContainer'
 
 
 class Home extends React.Component {
@@ -35,7 +36,7 @@ class Home extends React.Component {
                     <Route path="/register" component={SignUpContainer}/>
                     <Route path="/search" component={Result}/>
                     <Route path="/details/:bookId" component={DisplayContent}/>
-                    <Route path='/profile' component={UserProfile}/>
+                    <Route path='/myprofile' component={UserProfileContainer}/>
                     <Route path='/profile/:username' component={UserProfile}/>
                 </div>
 

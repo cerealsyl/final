@@ -23,13 +23,6 @@ class SignIn extends React.Component {
     };
     validateUser = () => {
         this.props.validateUser(this.state.username, this.state.password)
-        //  this.props.validateUser(this.state.username, this.state.password)
-        // console.log(this.state.username, this.props)
-        // if (this.state.username === 'alice') {
-        //     this.props.history.push('/profile')
-        // } else {
-        //
-        // }
     }
 
 
@@ -40,7 +33,7 @@ class SignIn extends React.Component {
             error = <div className="alert alert-danger mt-5" role="alert">
                 Log in failed, please try again</div>
         } else if (this.props.loggedIn) {
-            setTimeout(()=> this.props.history.push('/profile'), 500);
+            setTimeout(()=> this.props.history.push(`/myprofile`), 500);
             
         }
 

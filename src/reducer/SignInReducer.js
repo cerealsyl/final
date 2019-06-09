@@ -8,14 +8,6 @@ const SignInReducer = (state = initialState, action) => {
             return {user: action.user, loggedIn: true, loggedInFail: state.loggedInFail}
         case "VALIDATE_USER_REJECTED":
             return {user: state.user, loggedIn: null, loggedInFail: true}
-            // if(message === true) {
-            //     const newLoggedInFail = false
-            //     return {users: state.users, loggedInFail: newLoggedInFail}
-            // }else{
-            //     console.log("there")
-            //     return {users: state.users, loggedInFail: true}
-            // }
-
 
         default:
             return state

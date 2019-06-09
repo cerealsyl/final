@@ -21,10 +21,18 @@ const dispatchToPropertyMapper = (dispatch) => ({
             .then(response => {
                 if(!response.ok) throw new Error()
                 dispatch({
-                    type: "VALIDATE_USER_FULFILLED",
-                    user: response.json()
+                    type: "VALIDATE_USER_PENDING",
+                    // user: response.json()
                 })
+                return response.json()
             })
+            .then(json => {
+                dispatch({
+                    type: "VALIDATE_USER_FULFILLED",
+                    user: json
+                })
+        })
+
             .catch(err => {
                 dispatch({
                     type: "VALIDATE_USER_REJECTED"

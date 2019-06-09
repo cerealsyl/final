@@ -1,5 +1,6 @@
 let users = '/api/users'
 let login = '/api/login'
+let username = '/api/users/USERNAME'
 
 
 
@@ -26,6 +27,7 @@ export default class Service {
             }
         })
 
+
     };
 
     createUser = (user) => {
@@ -38,6 +40,14 @@ export default class Service {
         })
 
     };
+
+    findUserByUsername = (username) => {
+        return fetch(username.replace("USERNAME", username))
+            .then(response => {
+            return response.json();
+            })
+    };
+
 
 
 
