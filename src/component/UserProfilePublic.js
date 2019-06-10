@@ -12,7 +12,7 @@ class UserProfilePublic extends React.Component {
                 <div className="row mt-5">
                     <div className="col-3"></div>
                     <div className="col-6">
-                    <h4 className="text-center">User Profile</h4>
+                    <h4 className="text-center">Username display</h4>
                     {this.props.user.bookList.map((book, index) =>
                         <BookListItem
                             book={book}

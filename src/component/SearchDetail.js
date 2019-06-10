@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 class SearchDetail extends React.Component {
     constructor(props) {
@@ -31,6 +32,15 @@ class SearchDetail extends React.Component {
         // {console.log(response)}
         this.setState({book: response})
 
+    addBookToList = () => {
+        if(!this.props.user) {
+            this.props.history.push('/sign-in')
+        }else{
+            this.props.addBookToList(this.props.user.username, this.state.bookId)
+        }
+
+    }
+
 
 
     render() {
@@ -44,7 +54,7 @@ class SearchDetail extends React.Component {
                         <img src={this.state.book.volumeInfo.imageLinks.small} alt='image not found'/>
                         </div>
                         <div className="row">
-                            <button className="mt-3 btn btn-info col-5">
+                            <button onClick={this.addBookToList} className="mt-3 btn btn-info col-5">
                                 Add to Booklist
                             </button>
                             <div className="col-2"></div>
@@ -103,4 +113,4 @@ class SearchDetail extends React.Component {
     }
 }
 
-export default SearchDetail
+export default withRouter(SearchDetail)

@@ -1,6 +1,7 @@
 let users = '/api/users'
 let login = '/api/login'
 let username = '/api/users/USERNAME'
+let shortStory = '/api/shortstory'
 
 
 
@@ -47,6 +48,19 @@ export default class Service {
             return response.json();
             })
     };
+
+    searchShortStory = (keyword) => {
+        return fetch(shortStory, {
+            method: "POST",
+            body: JSON.stringify(keyword),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+            .then(response => {
+                return response.json()
+            })
+    }
 
 
 
