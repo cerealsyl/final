@@ -22,7 +22,6 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 if(!response.ok) throw new Error()
                 dispatch({
                     type: "VALIDATE_USER_PENDING",
-                    // user: response.json()
                 })
                 return response.json()
             })

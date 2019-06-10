@@ -9,25 +9,7 @@ const stateToProperty = (state) => ({
 })
 
 const dispatchToProperty = (dispatch) => ({
-    addBookToList: (userId, bookId) =>{
-        dispatch({
-            type: "ADD_BOOK_TO_LIST_PENDING"
-        })
-        service.addBookToList(userId, bookId)
-            .then(response => {
-                dispatch({
-                   type: "ADD_BOOK_TO_LIST_FULFILLED",
-                   response: response
-                })
-            })
-            .catch(err => {
-                dispatch({
-                    type: "ADD_BOOK_TO_LIST_REJECTED",
-                    err: err
-                })
-            })
 
-    }
 
 
 

@@ -6,7 +6,6 @@ class BookListItem extends React.Component {
     }
 
     render() {
-        console.log(window.location.pathname)
 
         return (
             <div>

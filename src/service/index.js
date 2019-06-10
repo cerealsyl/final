@@ -1,15 +1,13 @@
 let users = '/api/users'
 let login = '/api/login'
 let username = '/api/users/USERNAME'
-let stories = '/api/shortstory'
-let story = '/api/shortstory/STORY_ID'
-
-
-
+let stories = '/api/story'
+let story = '/api/story/STORY_ID'
+let user = '/api/users/USER_ID'
+let books = '/api/user/USER_ID/savedbooks'
 
 
 export default class Service {
-
 
     findAllUsers = () => {
         return fetch(users)
@@ -68,6 +66,31 @@ export default class Service {
             .then(response => {
                 return response.json()
             })
+
+
+    }
+
+    updateUserById = (userId, newUser) => {
+        return fetch(user.replace("USER_ID", userId), {
+            method: "PUT",
+            body: JSON.stringify(newUser),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+
+    }
+    addBookToList = (userId, title) => {
+        return fetch(books.replace("USER_ID", userId), {
+            method: "POST",
+            body: JSON.stringify(title),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
 
 
     }

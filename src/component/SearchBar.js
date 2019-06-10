@@ -59,10 +59,8 @@ class SearchBar extends React.Component {
 
     render() {
         let display = ""
-        console.log(this.props.story)
 
         if(this.state.books) {
-            console.log("in books")
             display =
                     <div className="col-5 mt-5">
 
@@ -80,7 +78,6 @@ class SearchBar extends React.Component {
 
                     </div>
         }else if(this.props.stories){
-            console.log("story", this.props.stories)
             display =
                 <div className="col-5 mt-5">
                     <ul className="list-group">

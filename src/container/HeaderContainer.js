@@ -1,11 +1,16 @@
 import { connect } from 'react-redux'
-import Header from ''
+import Header from '../component/Header'
 
 const stateToProperty = (state) => ({
 
 })
 
 const dispatchToProperty = (dispatch) => ({
+    logout: () => {
+        dispatch({
+            type: "LOG_OUT"
+        })
+    }
 
 })
 

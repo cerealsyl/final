@@ -6,13 +6,18 @@ class UserProfilePublic extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        // findBookListByUserId
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-3"></div>
                     <div className="col-6">
-                    <h4 className="text-center">Username display</h4>
+                    <h4 className="text-center">Username's Book List</h4>
+
                     {this.props.user.bookList.map((book, index) =>
                         <BookListItem
                             book={book}

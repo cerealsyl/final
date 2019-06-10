@@ -13,7 +13,7 @@ class Header extends React.Component {
                 <div className="col-8 float-left">
                     <div className="color-black">
                         <Link to="/">
-                            <h2>Bookie</h2>
+                            <h2 className="color-black mt-2 ml-2">Bookie</h2>
                         </Link>
 
                     </div>

@@ -34,7 +34,7 @@ class SearchBookDetail extends React.Component {
         if(!this.props.user) {
             this.props.history.push('/sign-in')
         }else{
-            this.props.addBookToList(this.props.user.username, this.state.bookId)
+            this.props.addBookToList(this.props.user.id, this.state.book.volumeInfo.title)
         }
 
     }

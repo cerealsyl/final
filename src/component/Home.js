@@ -1,6 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
-import Header from "./Header";
+import HeaderContainer from "../container/HeaderContainer";
 import SearchBarContainer from "../container/SearchBarContainer";
 import SignInContainer from "../container/SignInContainer";
 import SignUpContainer from "../container/SignUpContainer"
@@ -30,7 +30,7 @@ class Home extends React.Component {
         return (
             <Router>
                 <div className="container-fluid bg-bk w-100 h-100">
-                    <Header/>
+                    <HeaderContainer/>
                     <Route exact path="/" component={SearchBarContainer}/>
                     <Route path="/sign-in" component={SignInContainer}/>
                     <Route path="/register" component={SignUpContainer}/>
