@@ -3,8 +3,7 @@ import {withRouter} from 'react-router-dom'
 
 import HeadingWidget from "./HeadingWidget";
 import ParagraphWidget from "./ParagraphWidget";
-import ImageWidget from "./ImageWidget";
-import LinkWidget from "./LinkWidget";
+
 
 
 class WidgetList extends React.Component {
@@ -43,17 +42,10 @@ class WidgetList extends React.Component {
         if (this.state.widgetTitle) {
             const newWidget = {
                 type: this.state.widgetType,
-                order: null,
                 text: null,
-                src: null,
-                items: null,
                 size: null,
-                width: null,
-                height: null,
-                cssClass: null,
-                style: null,
                 value: null,
-                dataType: null,
+
             }
             this.props.createWidget(this.state.topicId, newWidget)
         }
@@ -90,9 +82,7 @@ class WidgetList extends React.Component {
                                     onChange={event => this.getWidgetType(event)}
                                     className="form-control">
                                     <option value="PARAGRAPH">Paragraph Widget</option>
-                                    <option value="IMAGE">Image Widget</option>
                                     <option value="HEADING">Heading Widget</option>
-                                    <option value="LINK">Link Widget</option>
                                 </select>
                             </li>
 
@@ -112,20 +102,8 @@ class WidgetList extends React.Component {
                                                     updateWidgetType={this.props.updateWidgetType}
                                                     props={this.props}
                                                 />}
-                                            {widget.type === 'IMAGE'
-                                            && <ImageWidget widget={widget}
-                                                            index={index}
-                                                            updateWidgetEditingMode={this.props.updateWidgetEditingMode}
-                                                            updateWidgetType={this.props.updateWidgetType}
-                                                            props={this.props}/>}
                                             {widget.type === 'PARAGRAPH'
                                             && <ParagraphWidget widget={widget}
-                                                                index={index}
-                                                                updateWidgetEditingMode={this.props.updateWidgetEditingMode}
-                                                                updateWidgetType={this.props.updateWidgetType}
-                                                                props={this.props}/>}
-                                            {widget.type === 'LINK'
-                                            && <LinkWidget widget={widget}
                                                            index={index}
                                                            updateWidgetEditingMode={this.props.updateWidgetEditingMode}
                                                            updateWidgetType={this.props.updateWidgetType}

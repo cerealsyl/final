@@ -23,11 +23,12 @@ class SearchBar extends React.Component {
             story: null
         })
 
-        if(this.state.searchType === "story") {
-            console.log("here")
-            this.props.searchShortStory(this.state.keyword)
-        }else {
-            console.log("there")
+        if(this.state.searchType) {
+            if(this.state.searchType === "story") {
+                console.log("here")
+                this.props.searchShortStory(this.state.keyword)
+            }else {
+                console.log("there")
                 return fetch((this.proxyUrl + this.BASE_URL + this.state.keyword), {
                     // mode: 'no-cors',
                     method: 'GET',
@@ -40,6 +41,10 @@ class SearchBar extends React.Component {
                     .then(response => response.json())
                     .then(response => this.renderBooks(response))
             }
+        }else{
+            alert("Please choose a search type.")
+        }
+
 
     }
 

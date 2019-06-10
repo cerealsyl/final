@@ -7,22 +7,35 @@ class SearchStoryDetail extends React.Component {
     }
 
     componentDidMount() {
-        this.props.findStoryById(this.props.match.params)
+        this.props.findStoryById(this.props.match.params.storyId)
     }
 
     render() {
-        return(
-            <div className="container">
-                <div className="row">
-                    <div className="col-3"></div>
-                    <div className="col-6">
-                        <h3>{this.props.story.title}</h3>
-                        <div>{this.props.story.story}</div>
+        if(! this.props.story) {
+            return <div>Loading .....</div>
+        }else{
+            return(
+                <div className="container">
+                    <div className="row">
+                        <div className="col-2"></div>
+                        <div className="col-8 mt-5">
+                            <h3 className="text-center">
+                                {this.props.story.title}
+                            </h3>
+                            <h5 className="text-center mt-2">
+                                sylvia
+                                {/*{this.props.story.writer.username}*/}
+                            </h5>
+                            <div className="mt-3">
+                                {this.props.story.story}
+                            </div>
+                        </div>
+                        <div className="col-2"></div>
                     </div>
-                    <div className="col-3"></div>
                 </div>
-            </div>
-        )
+            )
+        }
+
     }
 
 

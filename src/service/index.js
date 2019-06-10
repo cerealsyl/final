@@ -63,8 +63,12 @@ export default class Service {
             })
     }
     findStoryById = (storyId) => {
+        console.log("id", storyId)
         return fetch(story.replace("STORY_ID", storyId))
-        
+            .then(response => {
+                return response.json()
+            })
+
 
     }
 
