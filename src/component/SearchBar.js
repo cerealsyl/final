@@ -67,24 +67,24 @@ class SearchBar extends React.Component {
                                     (book,index) =>
                                         <li key={index}
                                             className='list-group-item'>
-                                            <Link to={`/search/${book.id}`}>{book.volumeInfo.title}</Link>
+                                            <Link to={`/search/book/${book.id}`}>{book.volumeInfo.title}</Link>
                                         </li>
                                 )
                             }
                         </ul>
 
                     </div>
-        }else if(this.props.story){
-            console.log("story")
+        }else if(this.props.stories){
+            console.log("story", this.props.stories)
             display =
                 <div className="col-5 mt-5">
                     <ul className="list-group">
                     {
-                        this.props.story.map(
+                        this.props.stories.map(
                             (story,index) =>
                                 <li key={index}
                                     className='list-group-item'>
-                                    <Link to={`/search/`}>{story}</Link>
+                                    <Link to={`/search/story/${story.storyId}`}>{story.title}</Link>
                                 </li>
                         )
                     }

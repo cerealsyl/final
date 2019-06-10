@@ -1,12 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-class SearchDetail extends React.Component {
+class SearchBookDetail extends React.Component {
     constructor(props) {
         super(props);
-        const pathname = window.location.pathname
-        const paths = pathname.split('/')
-        this.bookId = paths[2]
+        this.bookId = props.match.params.bookId
         this.searchBook()
         this.state = {
             book: undefined
@@ -45,7 +43,6 @@ class SearchDetail extends React.Component {
 
     render() {
         if(typeof(this.state.book) === 'undefined') return <div>Loading book details....</div>;
-        console.log(this.state.book)
         return (
             <div className="container mt-5">
                 <div className="row">
@@ -113,4 +110,4 @@ class SearchDetail extends React.Component {
     }
 }
 
-export default withRouter(SearchDetail)
+export default withRouter(SearchBookDetail)

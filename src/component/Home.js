@@ -6,7 +6,8 @@ import SignInContainer from "../container/SignInContainer";
 import SignUpContainer from "../container/SignUpContainer"
 import UserProfileContainer from '../container/ProfileContainer'
 import UserProfilePublicContainer from "../container/UserProfilePublicContainer";
-import SearchDetail from './SearchDetail';
+import SearchBookDetailContainer from '../container/SearchBookDetailContainer';
+import SearchStoryDetailContainer from '../container/SearchStoryDetailContainer';
 
 
 class Home extends React.Component {
@@ -35,7 +36,8 @@ class Home extends React.Component {
                     <Route path="/register" component={SignUpContainer}/>
                     <Route path='/myprofile' component={UserProfileContainer}/>
                     <Route path='/profile/:userId' component={UserProfilePublicContainer}/>
-                    <Route path="/search/:bookId" render={() => <SearchDetail/>}/>
+                    <Route path="/search/book/:bookId" render={() => <SearchBookDetailContainer/>}/>
+                    <Route path='/search/story/:storyId' render={() => <SearchStoryDetailContainer/>}/>
                 </div>
 
             </Router>

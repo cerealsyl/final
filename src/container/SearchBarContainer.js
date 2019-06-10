@@ -4,8 +4,8 @@ import Service from '../service'
 
 const service = new Service();
 
-const stateToProperty = (state) => console.log(state.SearchBarReducer.shortStory) || ({
-    story: state.SearchBarReducer.shortStory
+const stateToProperty = (state) => ({
+    stories: state.SearchBarReducer.stories
 
 })
 

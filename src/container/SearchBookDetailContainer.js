@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import SearchDetail from "../component/SearchDetail";
+import SearchBookDetail from "../component/SearchBookDetail";
 
 const stateToProperty = (state) => ({
     user: state.SignInReducer.user
@@ -10,4 +10,4 @@ const dispatchToProperty = (dispatch) => ({
 
 })
 
-export default connect(stateToProperty, dispatchToProperty)(SearchDetail)
+export default connect(stateToProperty, dispatchToProperty)(SearchBookDetail)

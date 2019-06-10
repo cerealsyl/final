@@ -1,7 +1,8 @@
 let users = '/api/users'
 let login = '/api/login'
 let username = '/api/users/USERNAME'
-let shortStory = '/api/shortstory'
+let stories = '/api/shortstory'
+let story = '/api/shortstory/STORY_ID'
 
 
 
@@ -50,7 +51,7 @@ export default class Service {
     };
 
     searchShortStory = (keyword) => {
-        return fetch(shortStory, {
+        return fetch(stories, {
             method: "POST",
             body: JSON.stringify(keyword),
             headers: {
@@ -60,6 +61,11 @@ export default class Service {
             .then(response => {
                 return response.json()
             })
+    }
+    findStoryById = (storyId) => {
+        return fetch(story.replace("STORY_ID", storyId))
+        
+
     }
 
 
