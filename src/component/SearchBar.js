@@ -25,8 +25,16 @@ class SearchBar extends React.Component {
 
         if(this.state.searchType) {
             if(this.state.searchType === "story") {
+                return fetch("/api/stories", {
+                    method: "POST",
+                    body:JSON.stringify(this.state.keyword),
+                    headers: {
+                        'content-type' : 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(json => this.renderStories(json))
 
-                this.props.searchShortStory(this.state.keyword)
             }else {
 
                 return fetch((this.proxyUrl + this.BASE_URL + this.state.keyword), {
@@ -59,6 +67,9 @@ class SearchBar extends React.Component {
     renderBooks = (response) =>
         this.setState({books: response.items})
 
+    renderStories = (json) =>
+        this.setState({stories: json})
+
     render() {
         let display = ""
 
@@ -79,12 +90,12 @@ class SearchBar extends React.Component {
                         </ul>
 
                     </div>
-        }else if(this.props.stories){
+        }else if(this.state.stories){
             display =
                 <div className="col-5 mt-5">
                     <ul className="list-group">
                     {
-                        this.props.stories.map(
+                        this.state.stories.map(
                             (story,index) =>
                                 <li key={index}
                                     className='list-group-item'>
