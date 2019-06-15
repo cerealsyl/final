@@ -6,9 +6,11 @@ const service = new Service();
 
 // once it is connected to the server, then it should be the user from SignInReducer
 
-const stateToPropertyMapper = (state) => ({
+const stateToPropertyMapper = (state) => console.log(state.SignInReducer) || ({
     loggedInFail: state.SignInReducer.loggedInFail,
-    user: state.profileReducer.user
+    user: state.SignInReducer.user,
+    booklist: state.SignInReducer.booklist,
+    stories: state.SignInReducer.stories
 })
 
 const dispatchToPropertyMapper = (dispatch) => ({
@@ -51,7 +53,65 @@ const dispatchToPropertyMapper = (dispatch) => ({
             })
     },
 
-    // updateStory
+    deleteBookItem: (userId, bookId) => {
+        dispatch({
+            type: "DELETE_BOOK_ITEM_PENDING"
+        })
+        service.deleteBookById(userId, bookId)
+            .then(json => {
+                dispatch({
+                    type: "DELETE_BOOK_ITEM_FULFILLED",
+                    data: json
+                })
+
+            })
+            .catch(err => {
+                dispatch({
+                    type: "DELETE_BOOK_ITEM_REJECTED",
+                    err: err
+                })
+            })
+    },
+
+    updateStory: (storyId, newStory) => {
+        dispatch({
+            type: "UPDATE_STORY_PENDING"
+        })
+        service.updateStoryById(storyId, newStory)
+            .then(json => {
+                dispatch({
+                    type: "UPDATE_STORY_FULFILLED",
+                    data: json
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "UPDATE_STORY_REJECTED",
+                    err: err
+                })
+            })
+    },
+
+    deleteStoryById: (userId, storyId) => {
+        dispatch({
+           type: "DELETE_STORY_BY_ID_PENDING"
+        })
+        service.deleteStoryById(userId, storyId)
+            .then(json => {
+                dispatch({
+                    type: "DELETE_STORY_BY_ID_FULFILLED",
+                    data: json
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "DELETE_STORY_BY_ID_REJECTED",
+                    err: err
+                })
+
+            })
+    }
+
 
 })
 

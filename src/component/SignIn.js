@@ -28,12 +28,18 @@ class SignIn extends React.Component {
 
     render() {
         let error = "";
-        console.log("loggedInFail", this.props.loggedInFail)
         if (this.props.loggedInFail) {
             error = <div className="alert alert-danger mt-5" role="alert">
                 Log in failed, please try again</div>
         } else if (this.props.loggedIn) {
-            setTimeout(()=> this.props.history.push(`/myprofile`), 500);
+            if(this.props.user.role === "VIEWER") {
+                this.props.findAllBooksByUserId(this.props.user.id)
+            }else if(this.props.user.role === "WRITER") {
+                console.log("here", this.props.user.role)
+                this.props.findAllStoriesByUserId(this.props.user.id)
+
+            }
+            setTimeout(()=> this.props.history.push(`/myprofile`), 1000);
             
         }
 

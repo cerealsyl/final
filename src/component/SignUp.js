@@ -14,23 +14,23 @@ const emailValidation = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props)
+
         this.state = {
             username: "",
             password: "",
             email: "",
-            userType: "",
+            role: "",
             formErrors: {
                 username: "",
                 password: "",
                 email: "",
-                userType: "",
+                role: "",
             }
         }
     }
 
     handleSubmit = event =>{
-        const {username, password, email, userType} = this.state
+        const {username, password, email, role} = this.state
         event.preventDefault();
 
         if(formValid(this.state.formErrors)) {
@@ -38,20 +38,13 @@ class SignUp extends React.Component {
                 username: username,
                 password: password,
                 email: email,
-                userType: userType
+                role: role
             }
             console.log("user", user)
             this.props.register(user)
         }else{
             console.log("form invalid")
         }
-        // this.props.register(this.state.name, this.state.password, this.state.email, this.state.userType)
-        // this.setState({
-        //     name: "",
-        //     password: "",
-        //     email: "",
-        //     userType: "",
-        // })
     }
 
 
@@ -79,7 +72,7 @@ class SignUp extends React.Component {
 
     handleUserType = event => {
         this.setState({
-            userType: event.currentTarget.value
+            role: event.currentTarget.value
         })
     }
 

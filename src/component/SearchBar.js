@@ -25,10 +25,10 @@ class SearchBar extends React.Component {
 
         if(this.state.searchType) {
             if(this.state.searchType === "story") {
-                console.log("here")
+
                 this.props.searchShortStory(this.state.keyword)
             }else {
-                console.log("there")
+
                 return fetch((this.proxyUrl + this.BASE_URL + this.state.keyword), {
                     // mode: 'no-cors',
                     method: 'GET',
@@ -47,6 +47,8 @@ class SearchBar extends React.Component {
 
 
     }
+
+
 
     searchType = e => {
         this.setState({
