@@ -35,9 +35,7 @@ class SignIn extends React.Component {
             if(this.props.user.role === "VIEWER") {
                 this.props.findAllBooksByUserId(this.props.user.id)
             }else if(this.props.user.role === "WRITER") {
-                console.log("here", this.props.user.role)
                 this.props.findAllStoriesByUserId(this.props.user.id)
-
             }
             setTimeout(()=> this.props.history.push(`/myprofile`), 1000);
             

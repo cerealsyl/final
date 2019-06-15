@@ -118,7 +118,7 @@ class SearchBar extends React.Component {
                             onChange={this.keywordChanged}
                             className="col-8 form-control mt-350"
                             type="text"
-                            placeholder="search your favorite authors, books...."/>
+                            placeholder="search your favorite stories or books...."/>
                         <button
                             onClick={this.searchBooks}
                             className="col-2 btn btn-outline-success ml-3 mt-350">

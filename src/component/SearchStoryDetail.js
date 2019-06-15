@@ -11,32 +11,36 @@ class SearchStoryDetail extends React.Component {
     }
 
     render() {
-        if(! this.props.story) {
-            return <div>Loading .....</div>
+        if(this.props.message) {
+            return <div className="mt-5 text-center">{this.props.message}</div>
         }else{
-            return(
-                <div className="container">
-                    <div className="row">
-                        <div className="col-2"></div>
-                        <div className="col-8 mt-5">
-                            <h3 className="text-center">
-                                {this.props.story.title}
-                            </h3>
-                            <h5 className="text-center mt-2">
-                                sylvia
-                                {/*{this.props.story.writer.username}*/}
-                            </h5>
-                            <div className="mt-3">
-                                {this.props.story.story}
+            if(! this.props.story) {
+                return <div>Loading .....</div>
+            }else{
+                return(
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-2"></div>
+                            <div className="col-8 mt-5">
+                                <h3 className="text-center">
+                                    {this.props.story.title}
+                                </h3>
+                                <h5 className="text-center mt-2">
+                                    {/*{this.props.story.writer.username}*/}
+                                </h5>
+                                <div className="mt-3">
+                                    {this.props.story.story}
+                                </div>
                             </div>
+                            <div className="col-2"></div>
                         </div>
-                        <div className="col-2"></div>
                     </div>
-                </div>
-            )
-        }
+                )
+            }
 
+        }
     }
+
 
 
 }

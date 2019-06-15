@@ -6,6 +6,7 @@ let book = '/api/users/USER_ID/books/BOOK_ID'
 let stories = '/api/users/USER_ID/stories'
 let story = '/api/stories/STORY_ID'
 let userStory = '/api/users/USER_ID/stories/STORY_ID'
+let userBook = '/api/books/BOOK_TITLE/users'
 
 
 
@@ -43,10 +44,10 @@ export default class Service {
 
     };
 
-    findUserByUsername = (username) => {
-        return fetch(username.replace("USERNAME", username))
+    findUserById = (userId) => {
+        return fetch(user.replace("USER_ID", userId))
             .then(response => {
-            return response.json();
+                return response
             })
     };
 
@@ -65,7 +66,7 @@ export default class Service {
     findStoryById = (storyId) => {
         return fetch(story.replace("STORY_ID", storyId))
             .then(response => {
-                return response.json()
+                return response
             })
 
 
@@ -84,10 +85,10 @@ export default class Service {
             })
 
     }
-    addBookToList = (userId, title) => {
+    addBookToList = (userId, newBook) => {
         return fetch(books.replace("USER_ID", userId), {
             method: "POST",
-            body: JSON.stringify(title),
+            body: JSON.stringify(newBook),
             headers: {
                 'content-type': 'application/json'
             }
@@ -157,6 +158,28 @@ export default class Service {
             })
     }
 
+    findAllUsersByBookTitle = (title) => {
+        return fetch(userBook.replace("BOOK_TITLE", title))
+            .then(response => {
+                return response.json()
+            })
+
+    }
+
+    createStory = (userId, newStory) =>{
+
+        return fetch(stories.replace("USER_ID", userId), {
+            method: "POST",
+            body: JSON.stringify(newStory),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+            .then(response => {
+                return response.json()
+            })
+    }
+
 
 
 
@@ -165,56 +188,3 @@ export default class Service {
 
 
 
-
-// export default class Service {
-//     static myInstance = null;
-//
-//     users = [
-//         {
-//             id: '123',
-//             username: 'dan',
-//             password: 'dan',
-//             email: 'dan@gmail.com'
-//         },
-//         {
-//             id: '234',
-//             username: 'siyang',
-//             password: 'siyang',
-//             email: 'siyang@gmail.com'
-//         },
-//         {
-//             id: '345',
-//             username: 'heather',
-//             password: 'heather',
-//             email: 'heather@gmail.com'
-//         }
-//     ]
-//
-//     static getInstance() {
-//         if(Service.myInstance == null) {
-//             Service.myInstance = new Service();
-//         }
-//         return this.myInstance
-//     }
-//
-//     createUser = user => {
-//         this.users.push(user)
-//         return this.users
-//     }
-//
-//     findAllUsers = () => {
-//         return this.users
-//     }
-//
-//     validateUser = (email, password) => {
-//         console.log(email, password)
-//
-//         const targetUser = this.users.find(user => user.email === email)
-//         if(targetUser.password === password) {
-//             return true
-//         }else{
-//             return false
-//         }
-//
-//     }
-// }

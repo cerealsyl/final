@@ -1,5 +1,6 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import BookListItem from "./BookListItem";
 
 class SearchBookDetail extends React.Component {
     constructor(props) {
@@ -13,40 +14,69 @@ class SearchBookDetail extends React.Component {
     proxyUrl = 'https://secure-garden-16347.herokuapp.com/'
     BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
-    searchBook = () =>
-        fetch((this.proxyUrl+ this.BASE_URL + this.bookId),  {
+    searchBook = () => {
+        fetch((this.proxyUrl + this.BASE_URL + this.bookId), {
             // mode: 'no-cors',
             method: 'GET',
-            headers:{
+            headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials':true,
-                'Access-Control-Allow-Methods':'POST, GET'
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Methods': 'POST, GET'
             }
         })
             .then(response => response.json())
             .then(response => this.renderBook(response))
+    }
 
-    renderBook = (response) =>
-        // {console.log(response)}
+    renderBook = (response) => {
         this.setState({book: response})
+        this.props.findAllUsersByBookTitle(this.state.book.volumeInfo.title)
+    }
 
     addBookToList = () => {
         if(!this.props.user) {
             this.props.history.push('/sign-in')
         }else{
-            this.props.addBookToList(this.props.user.id, this.state.book.volumeInfo.title)
+            const newBook = {
+                title: this.state.book.volumeInfo.title
+            }
+
+            this.props.addBookToList(this.props.user.id, newBook)
         }
 
     }
 
 
-
     render() {
         if(typeof(this.state.book) === 'undefined') return <div>Loading book details....</div>;
+        let display = "";
+        if(this.props.response) {
+            display = <div className="alert alert-success" role="alert">
+                Successfully saved the book to your list!
+            </div>
+        }
+        let users = ""
+        if(this.props.users.length === 0) {
+            users = <div className="mt-2">This book has not been saved to any booklist yet.</div>
+        }else {
+            users =
+                <ul className="list-group mt-2 text-center">
+                    {
+                        this.props.users.map(
+                            (user, index) =>
+                                <li key={index}
+                                    className='list-group-item'>
+                                    <Link to={`/profile/${user.id}`}>{user.username}</Link>
+                                </li>
+                        )
+                    }
+                </ul>
+        }
         return (
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-4">
+                        {display}
                         <div>
                         <img src={this.state.book.volumeInfo.imageLinks.small} alt='image not found'/>
                         </div>
@@ -84,22 +114,8 @@ class SearchBookDetail extends React.Component {
                             <li className="list-group-item border-0"></li>
 
                         </ul>
-                        <ul className="mt-3 list-group">
-                            <h4>Bookies that saved this book: </h4>
-                            <li className="list-group-item border-0">
-                                sylvia tang
-                            </li>
-                            <li className="list-group-item border-0">
-                                Yizong hu
-                            </li>
-                            <li className="list-group-item border-0">
-                               Shujing Chen
-                            </li>
-                            <li className="list-group-item border-0">
-                                Shiqing Dong
-                            </li>
-
-                        </ul>
+                        <h4>Bookies that saved this book:</h4>
+                        {users}
                     </div>
 
 

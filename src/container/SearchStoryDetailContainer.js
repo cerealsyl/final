@@ -5,7 +5,8 @@ import Service from '../service'
 const service = new Service();
 
 const stateToProperty = (state) => ({
-    story: state.SearchStoryReducer.story
+    story: state.SearchStoryReducer.story,
+    message: state.SearchStoryReducer.message
 
 })
 
@@ -15,15 +16,23 @@ const dispatchToProperty = (dispatch) => ({
             type: "FIND_STORY_PENDING"
         })
         service.findStoryById(storyId)
+            .then(response => {
+                if (!response.ok) throw new Error()
+                dispatch({
+                    type: "FIND_STORY_PENDING",
+                })
+                return response.json()
+            })
             .then(json => {
                 dispatch({
-                    type: "FIND_STORY_FULFILLED",
+                    type:"FIND_STORY_FULFILLED",
                     data: json
                 })
             })
             .catch(err => {
                 dispatch({
-                    type: "FIND_STORY_REJECTED"
+                    type: "FIND_STORY_REJECTED",
+                    err: err
                 })
             })
 

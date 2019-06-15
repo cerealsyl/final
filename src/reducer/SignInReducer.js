@@ -9,7 +9,7 @@ const SignInReducer = (state = initialState, action) => {
         case "VALIDATE_USER_REJECTED":
             return {user: state.user, loggedIn: null, loggedInFail: true, booklist: [], stories: []}
         case "UPDATE_USER_FULFILLED":
-            return {user: action.data, loggedIn: true, loggedInFail: state.loggedInFail, booklist: [], stories: []};
+            return {user: action.data, loggedIn: true, loggedInFail: state.loggedInFail, booklist: state.booklist, stories: state.stories};
         case "LOG_OUT":
             return initialState
         case "FIND_BOOKS_BY_USER_ID_FULFILLED":
@@ -17,6 +17,7 @@ const SignInReducer = (state = initialState, action) => {
             return {user: state.user, loggedIn: true, loggedInFail: state.loggedInFail, booklist: action.data, stories: []}
         case "FIND_STORIES_BY_USER_ID_FULFILLED":
         case "UPDATE_STORY_FULFILLED":
+        case "CREATE_STORY_FULFILLED":
         case "DELETE_STORY_BY_ID_FULFILLED":
             return {user: state.user, loggedIn: true, loggedInFail: state.loggedInFail, booklist: state.booklist, stories: action.data}
         case "FIND_BOOKS_BY_USER_ID_PENDING":

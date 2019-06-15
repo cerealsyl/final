@@ -110,6 +110,25 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 })
 
             })
+    },
+    createStory: (userId, newStory) => {
+        dispatch({
+            type: "CREATE_STORY_PENDING"
+        })
+        service.createStory(userId, newStory)
+            .then(json => {
+                dispatch({
+                    type: "CREATE_STORY_FULFILLED",
+                    data: json
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "CREATE_STORY_REJECTED",
+                    err: err
+                })
+            })
+
     }
 
 

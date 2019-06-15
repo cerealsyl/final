@@ -15,7 +15,10 @@ class UserProfile extends React.Component {
             firstName: "",
             lastName: "",
             selectedStory: "",
-            storyBody: ""
+            storyBody: "",
+            storyTitle: "",
+
+            newStoryTitle: ""
         }
     }
 
@@ -27,9 +30,12 @@ class UserProfile extends React.Component {
             password: this.state.password,
             email: this.state.email,
             firstName: this.state.firstName,
-            lastName: this.state.lastName
+            lastName: this.state.lastName,
+            // bookList: this.props.user.storyList
 
         }
+
+        console.log(this.props.user.storyList)
         this.props.updateUser(this.props.user.id, newUser)
         this.setState({
             editInfoMode: false
@@ -39,7 +45,8 @@ class UserProfile extends React.Component {
     updateStory = () => {
         const newStory = {
             ...this.state.selectedStory,
-            story: this.state.storyBody
+            story: this.state.storyBody,
+            title: this.state.storyTitle
         }
         this.props.updateStory(this.state.selectedStory.storyId, newStory);
         this.setState({
@@ -48,6 +55,18 @@ class UserProfile extends React.Component {
         })
 
 
+    }
+
+    createStory = () => {
+        const newStory = {
+            story: "New story here... (click edit to edit me)",
+            title: this.state.newStoryTitle,
+            writer_id: this.props.user.id
+        }
+        this.props.createStory(this.props.user.id, newStory);
+        this.setState({
+            newStoryTitle: ""
+        })
     }
 
 
@@ -61,15 +80,15 @@ class UserProfile extends React.Component {
                 </div>
                 <div className="row">
                     <textarea rows="6" onChange={e => this.setState({storyBody: e.currentTarget.value})}
-                              value={this.state.storyBody} className="form-control mt-2"></textarea>
+                              value={this.state.storyBody} className="form-control mt-2"/>
                 </div>
 
             </div>
         } else if (this.state.selectedStory && !this.state.editStoryMode) {
             display = <div>
-                <div className="row float-right">
-                    <button onClick={() => this.setState({editStoryMode: true})} className="btn btn-info ">edit</button>
-                </div>
+                {/*<div className="row float-right">*/}
+                {/*    <button onClick={() => this.setState({editStoryMode: true})} className="btn btn-info ">edit</button>*/}
+                {/*</div>*/}
                 <div className="row">
                     <p className="mt-2">
                         {this.state.selectedStory.story}
@@ -96,7 +115,7 @@ class UserProfile extends React.Component {
                             user={this.props.user}
                             book={book}
                             key={index}
-                        deleteBookItem={this.props.deleteBookItem}/>
+                            deleteBookItem={this.props.deleteBookItem}/>
                     )}
                 </ul>
             } else {
@@ -111,16 +130,35 @@ class UserProfile extends React.Component {
                         <li onClick={() => this.setState({selectedStory: story, storyBody: story.story})} key={index}
                             className="nav-item">
                             <a className={`nav-link color-black ${this.state.selectedStory === story ? "active" : ""}`}
-                               href="#">{story.title}</a>
+                               href="#">
+
+                                {this.state.editStoryMode&&(this.state.selectedStory === story) ?
+                                    <input
+                                        onChange={e => this.setState({storyTitle: e.currentTarget.value})}
+                                        value={this.state.storyTitle}
+                                        type="text"
+                                        placeholder={story.title}/> :
+                                    story.title}
+
+                            </a>
                         </li>)}
                     <button
                         onClick={() => this.props.deleteStoryById(this.props.user.id, this.state.selectedStory.storyId)}
                         className="btn btn-danger ml-2">delete
                     </button>
-                    <button
-                        // onClick={this.updateStoryTitle}
-                        className="btn btn-info ml-2">edit
+
+                    <button onClick={() => this.setState({editStoryMode: true})} className="btn btn-info ">edit</button>
+
+                    <input onChange={e => this.setState({newStoryTitle: e.currentTarget.value})}
+                           value={this.state.newStoryTitle}
+                           placeholder="New Story Title"
+                    />
+                    <button className='btn btn-warning'
+                            onClick={this.createStory}
+                    >
+                        Create New
                     </button>
+
                 </ul>
 
             } else {
@@ -238,6 +276,15 @@ class UserProfile extends React.Component {
                                         placeholder="last name"/>}
                                     {!this.state.editInfoMode
                                     && <div>{this.props.user.lastName}</div>}
+                                </div>
+
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col-6">
+                                    role
+                                </div>
+                                <div className="col-6">
+                                    <div>{this.props.user.role}</div>
                                 </div>
 
                             </div>
