@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import Header from '../component/Header'
 
 const stateToProperty = (state) => ({
+    user: state.SignInReducer.user
 
 })
 

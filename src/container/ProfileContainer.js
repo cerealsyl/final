@@ -6,7 +6,7 @@ const service = new Service();
 
 // once it is connected to the server, then it should be the user from SignInReducer
 
-const stateToPropertyMapper = (state) => console.log(state.SignInReducer) || ({
+const stateToPropertyMapper = (state) => ({
     loggedInFail: state.SignInReducer.loggedInFail,
     user: state.SignInReducer.user,
     booklist: state.SignInReducer.booklist,
