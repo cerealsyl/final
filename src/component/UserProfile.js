@@ -86,9 +86,6 @@ class UserProfile extends React.Component {
             </div>
         } else if (this.state.selectedStory && !this.state.editStoryMode) {
             display = <div>
-                {/*<div className="row float-right">*/}
-                {/*    <button onClick={() => this.setState({editStoryMode: true})} className="btn btn-info ">edit</button>*/}
-                {/*</div>*/}
                 <div className="row">
                     <p className="mt-2">
                         {this.state.selectedStory.story}
@@ -102,7 +99,7 @@ class UserProfile extends React.Component {
         if (!this.props.user) {
             return <div className="row text-center">
                 <Link className="ml-50" to='/sign-in'>
-                    <div className="color-black mt-5">Click me to view profile</div>
+                    <div className="color-black mt-5">Click me to sign in</div>
                 </Link>
             </div>
 

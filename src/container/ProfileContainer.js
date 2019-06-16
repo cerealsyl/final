@@ -4,7 +4,6 @@ import Service from '../service'
 
 const service = new Service();
 
-// once it is connected to the server, then it should be the user from SignInReducer
 
 const stateToPropertyMapper = (state) => ({
     loggedInFail: state.SignInReducer.loggedInFail,

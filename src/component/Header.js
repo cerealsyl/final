@@ -26,7 +26,7 @@ class Header extends React.Component {
                         <Link to="/myprofile" className="color-white">My Profile</Link>
                     </div>
                     <div onClick={this.props.logout}
-                         className={`mt-2 btn btn-warning col-3 color-white`}>
+                         className={`mt-2 ml-2 btn btn-warning col-3 color-white`}>
                         <Link to="/" className="color-white">Log out</Link>
                     </div>
                 </div>

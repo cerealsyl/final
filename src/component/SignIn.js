@@ -27,6 +27,7 @@ class SignIn extends React.Component {
 
 
     render() {
+        console.log(this.props)
         let error = "";
         if (this.props.loggedInFail) {
             error = <div className="alert alert-danger mt-5" role="alert">
@@ -37,7 +38,7 @@ class SignIn extends React.Component {
             }else if(this.props.user.role === "WRITER") {
                 this.props.findAllStoriesByUserId(this.props.user.id)
             }
-            setTimeout(()=> this.props.history.push(`/myprofile`), 1000);
+            setTimeout(()=> this.props.history.push(`/myprofile`), 700);
             
         }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
-import BookListItem from "./BookListItem";
+
 
 class SearchBookDetail extends React.Component {
     constructor(props) {
@@ -47,14 +47,25 @@ class SearchBookDetail extends React.Component {
     }
 
 
+
+
+
     render() {
         if(typeof(this.state.book) === 'undefined') return <div>Loading book details....</div>;
+
+
         let display = "";
-        if(this.props.response) {
+        if(this.props.response === "true") {
             display = <div className="alert alert-success" role="alert">
                 Successfully saved the book to your list!
             </div>
+        }else if(this.props.response === "false") {
+            display = <div className="alert alert-warning" role="alert">
+                You have already saved this book!
+            </div>
         }
+
+
         let users = ""
         if(this.props.users.length === 0) {
             users = <div className="mt-2">This book has not been saved to any booklist yet.</div>
@@ -72,6 +83,18 @@ class SearchBookDetail extends React.Component {
                     }
                 </ul>
         }
+
+        let button = ""
+        if(!this.props.user || this.props.user.role === "VIEWER") {
+            button = <button
+                onClick={this.addBookToList}
+                className={`mt-3 btn btn-info col-5`}>
+                Add to Booklist
+            </button>
+        }else{
+            button = <div></div>
+        }
+
         return (
             <div className="container mt-5">
                 <div className="row">
@@ -81,9 +104,12 @@ class SearchBookDetail extends React.Component {
                         <img src={this.state.book.volumeInfo.imageLinks.small} alt='image not found'/>
                         </div>
                         <div className="row">
-                            <button onClick={this.addBookToList} className="mt-3 btn btn-info col-5">
-                                Add to Booklist
-                            </button>
+                            {/*<button*/}
+                            {/*    onClick={this.addBookToList}*/}
+                            {/*    className={`${this.state.user.role === "WRITER"? "invisible" : "visible"}mt-3 btn btn-info col-5`}>*/}
+                            {/*    Add to Booklist*/}
+                            {/*</button>*/}
+                            {button}
                             <div className="col-2"></div>
                                 <a className="col-5 mt-4" href={this.state.book.accessInfo.webReaderLink}>Read Online</a>
                         </div>

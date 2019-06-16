@@ -12,14 +12,6 @@ let userBook = '/api/books/BOOK_TITLE/users'
 
 export default class Service {
 
-    findAllUsers = () => {
-        return fetch(users)
-            .then(function (response) {
-                return response.json();
-
-            })
-
-    };
 
     validateUser = (username, password) => {
         return fetch(login, {

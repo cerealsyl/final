@@ -5,7 +5,7 @@ const initialState = {user: null, loggedIn: null, loggedInFail: null, booklist: 
 const SignInReducer = (state = initialState, action) => {
     switch(action.type) {
         case "VALIDATE_USER_FULFILLED":
-            return {user: action.user, loggedIn: true, loggedInFail: state.loggedInFail, booklist: [], stories: []}
+            return {user: action.user, loggedIn: true, loggedInFail: false, booklist: [], stories: []}
         case "VALIDATE_USER_REJECTED":
             return {user: state.user, loggedIn: null, loggedInFail: true, booklist: [], stories: []}
         case "UPDATE_USER_FULFILLED":
