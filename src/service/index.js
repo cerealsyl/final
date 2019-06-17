@@ -1,3 +1,4 @@
+let URL = "https://hidden-earth-39973.herokuapp.com"
 let users = '/api/users'
 let login = '/api/login'
 let user = '/api/users/USER_ID'
@@ -14,7 +15,7 @@ export default class Service {
 
 
     validateUser = (username, password) => {
-        return fetch(login, {
+        return fetch(URL+ login, {
             method: 'POST',
             body: JSON.stringify({username: username, password: password}),
             headers: {
@@ -26,7 +27,7 @@ export default class Service {
     };
 
     createUser = (user) => {
-        return fetch(users, {
+        return fetch(URL+ users, {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
