@@ -10,6 +10,8 @@ const SearchBookDetailReducer = (state = initialState, action) => {
             return {response: state.response, users: action.data}
         case "ADD_BOOK_TO_LIST_REJECTED":
             return {response: "false", users: state.users}
+        case "REMOVE_ALERT":
+            return {response: null, users: state.users}
         default:
             return state
     }

@@ -72,9 +72,37 @@ class SearchBar extends React.Component {
 
     render() {
         let display = ""
+        if(this.state.searchType && this.state.searchType === "story"  && this.state.stories) {
+            if(this.state.stories.length === 0) {
+                display = <div className="col-5 mt-5">
+                    Not result found, please search a different keyword.
+                </div>
+            }else{
+                display =
+                    <div className="col-5 mt-5">
+                        <ul className="list-group">
+                            {
+                                this.state.stories.map(
+                                    (story,index) =>
+                                        <li key={index}
+                                            className='list-group-item'>
+                                            <Link to={`/search/story/${story.storyId}`}>{story.title}</Link>
+                                        </li>
+                                )
+                            }
+                        </ul>
 
-        if(this.state.books) {
-            display =
+                    </div>
+
+            }
+
+        }else if(this.state.searchType && this.state.searchType === "book" && this.state.books){
+            if(this.state.books.length === 0) {
+                display = <div className="col-5 mt-5">
+                    Not result found, please search a different keyword.
+                </div>
+            }else{
+                display =
                     <div className="col-5 mt-5">
 
                         <ul className="list-group">
@@ -90,24 +118,8 @@ class SearchBar extends React.Component {
                         </ul>
 
                     </div>
-        }else if(this.state.stories){
-            display =
-                <div className="col-5 mt-5">
-                    <ul className="list-group">
-                    {
-                        this.state.stories.map(
-                            (story,index) =>
-                                <li key={index}
-                                    className='list-group-item'>
-                                    <Link to={`/search/story/${story.storyId}`}>{story.title}</Link>
-                                </li>
-                        )
-                    }
-                </ul>
-
-            </div>
+            }
         }
-
         return (
             <div className="container">
                 <div className="row">

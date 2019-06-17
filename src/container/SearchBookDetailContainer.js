@@ -50,6 +50,12 @@ const dispatchToProperty = (dispatch) => ({
                     err: err
                 })
             })
+    },
+
+    removeSuccessfullyAddBookAlert: () => {
+        dispatch({
+            type: "REMOVE_ALERT"
+        })
     }
 
 })

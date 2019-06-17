@@ -31,6 +31,7 @@ class SearchBookDetail extends React.Component {
     renderBook = (response) => {
         this.setState({book: response})
         this.props.findAllUsersByBookTitle(this.state.book.volumeInfo.title)
+        this.props.removeSuccessfullyAddBookAlert()
     }
 
     addBookToList = () => {
