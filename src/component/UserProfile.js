@@ -288,9 +288,12 @@ class UserProfile extends React.Component {
 
                         </div>
                         {this.props.user.role === "VIEWER" && <div className="col-7">
-                            <h3>
+                            <div className="row">
+                            <h3 className="col-6">
                                 Saved BookList:
                             </h3>
+                                <button onClick={this.props.findAllBooksByUserId(this.props.user.id)} className="invisible">refresh</button>
+                            </div>
                             {booklist}
                         </div>}
                         {this.props.user.role === "WRITER" && <div className="col-7">

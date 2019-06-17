@@ -128,7 +128,27 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 })
             })
 
-    }
+    },
+    findAllBooksByUserId: (userId) => {
+        dispatch({
+            type: "FIND_BOOKS_BY_USER_ID_PENDING"
+        })
+        service.findAllBooksByUserId(userId)
+            .then(json => {
+                dispatch({
+                    type: "FIND_BOOKS_BY_USER_ID_FULFILLED",
+                    data: json
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "FIND_BOOKS_BY_USER_ID_REJECTED",
+                    err: err
+
+                })
+            })
+
+    },
 
 
 })
