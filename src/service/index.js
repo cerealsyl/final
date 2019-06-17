@@ -1,4 +1,5 @@
 let URL = "https://hidden-earth-39973.herokuapp.com"
+// let URL = "http://localhost:8080"
 let users = '/api/users'
 let login = '/api/login'
 let user = '/api/users/USER_ID'
@@ -38,14 +39,14 @@ export default class Service {
     };
 
     findUserById = (userId) => {
-        return fetch(user.replace("USER_ID", userId))
+        return fetch(URL+ user.replace("USER_ID", userId))
             .then(response => {
                 return response
             })
     };
 
     searchShortStory = (keyword) => {
-        return fetch(stories, {
+        return fetch(URL+ stories, {
             method: "POST",
             body: JSON.stringify(keyword),
             headers: {
@@ -57,7 +58,7 @@ export default class Service {
             })
     }
     findStoryById = (storyId) => {
-        return fetch(story.replace("STORY_ID", storyId))
+        return fetch(URL+ story.replace("STORY_ID", storyId))
             .then(response => {
                 return response
             })
@@ -66,7 +67,7 @@ export default class Service {
     }
 
     updateUserById = (userId, newUser) => {
-        return fetch(user.replace("USER_ID", userId), {
+        return fetch(URL+ user.replace("USER_ID", userId), {
             method: "PUT",
             body: JSON.stringify(newUser),
             headers: {
@@ -79,7 +80,7 @@ export default class Service {
 
     }
     addBookToList = (userId, newBook) => {
-        return fetch(books.replace("USER_ID", userId), {
+        return fetch(URL+ books.replace("USER_ID", userId), {
             method: "POST",
             body: JSON.stringify(newBook),
             headers: {
@@ -91,7 +92,7 @@ export default class Service {
     }
 
     findAllBooksByUserId = (userId) => {
-        return fetch(books.replace("USER_ID", userId))
+        return fetch(URL+ books.replace("USER_ID", userId))
             .then(response => {
                 return response.json()
             })
@@ -100,7 +101,7 @@ export default class Service {
     deleteBookById = (userId, bookId) => {
         let temp = book.replace("USER_ID", userId)
         temp = temp.replace("BOOK_ID", bookId)
-        return fetch(temp, {
+        return fetch(URL+ temp, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json'
@@ -114,7 +115,7 @@ export default class Service {
 
     findAllStoriesByUserId = (userId) => {
 
-        return fetch(stories.replace("USER_ID", userId))
+        return fetch(URL+ stories.replace("USER_ID", userId))
             .then(response => {
                 // console.log("response", response.json())
                 return response.json()
@@ -123,7 +124,7 @@ export default class Service {
     }
 
     updateStoryById = (storyId, newStory) => {
-        return fetch(story.replace("STORY_ID", storyId), {
+        return fetch(URL+ story.replace("STORY_ID", storyId), {
             method: "PUT",
             body: JSON.stringify(newStory),
             headers: {
@@ -139,7 +140,7 @@ export default class Service {
         let temp = userStory.replace("USER_ID", userId);
         temp = temp.replace("STORY_ID", storyId);
 
-        return fetch(temp, {
+        return fetch(URL+ temp, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json'
@@ -152,7 +153,7 @@ export default class Service {
     }
 
     findAllUsersByBookTitle = (title) => {
-        return fetch(userBook.replace("BOOK_TITLE", title))
+        return fetch(URL+ userBook.replace("BOOK_TITLE", title))
             .then(response => {
                 return response.json()
             })
@@ -161,7 +162,7 @@ export default class Service {
 
     createStory = (userId, newStory) =>{
 
-        return fetch(stories.replace("USER_ID", userId), {
+        return fetch(URL+ stories.replace("USER_ID", userId), {
             method: "POST",
             body: JSON.stringify(newStory),
             headers: {
