@@ -27,7 +27,7 @@ class SignIn extends React.Component {
 
 
     render() {
-        console.log(this.props)
+        console.log("props", this.props)
         let error = "";
         if (this.props.loggedInFail) {
             error = <div className="alert alert-danger mt-5" role="alert">
