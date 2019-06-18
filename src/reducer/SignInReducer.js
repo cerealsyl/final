@@ -10,11 +10,11 @@ const SignInReducer = (state = initialState, action) => {
             return {user: state.user, loggedIn: null, loggedInFail: true, booklist: [], stories: []}
         case "UPDATE_USER_FULFILLED":
             return {user: action.data, loggedIn: true, loggedInFail: state.loggedInFail, booklist: state.booklist, stories: state.stories};
-        case "LOG_OUT":
-            return initialState
         case "FIND_BOOKS_BY_USER_ID_FULFILLED":
         case "DELETE_BOOK_ITEM_FULFILLED":
             return {user: state.user, loggedIn: true, loggedInFail: state.loggedInFail, booklist: action.data, stories: []}
+        case "LOG_OUT":
+            return {user: null, loggedIn: null, loggedInFail: null, booklist:[], stories: []}
         case "FIND_STORIES_BY_USER_ID_FULFILLED":
         case "UPDATE_STORY_FULFILLED":
         case "CREATE_STORY_FULFILLED":

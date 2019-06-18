@@ -6,6 +6,11 @@ class Header extends React.Component {
         super(props)
     }
 
+
+    logout = () => {
+        this.props.logout()
+        setTimeout(()=> this.props.history.push(`/`), 100);
+    }
     render() {
 
         let display = ""
@@ -19,8 +24,10 @@ class Header extends React.Component {
             display =
                 <div className="row">
                     <Link to="/myprofile" className="color-white mt-2 btn btn-success col-3">My Profile</Link>
-                    <Link onClick={this.props.logout} to="/" className="mt-2 ml-2 btn btn-warning col-3 color-white">Log
-                        out</Link>
+                    <div
+                        onClick={this.logout}
+                        className="mt-2 ml-2 btn btn-warning col-3 color-white">
+                        Log out</div>
                 </div>
 
         }
@@ -39,23 +46,6 @@ class Header extends React.Component {
                 <div className="col-4 float-right">
 
                     {display}
-                    {/*<div*/}
-                    {/*    className={`${this.props.user !== null ? "visible" : "invisible"} mt-2 btn btn-success col-2`}>*/}
-                    {/*    <Link to="/myprofile" className="color-white">My Profile</Link>*/}
-                    {/*</div>*/}
-                    {/*<div*/}
-                    {/*    className={`${window.location.pathname === '/myprofile' ? "invisible" : "visible"} mt-2 btn btn-success col-2`}>*/}
-                    {/*    <Link to="/sign-in" className="color-white">Sign In</Link>*/}
-                    {/*</div>*/}
-                    {/*<div*/}
-                    {/*    className={`${window.location.pathname === '/myprofile' ? "invisible" : "visible"} mt-2 ml-2 btn btn-success col-2 color-white`}>*/}
-                    {/*    <Link to="/register" className="color-white">Sign up</Link>*/}
-                    {/*</div>*/}
-                    {/*<div onClick={this.props.logout}*/}
-                    {/*     className={`${window.location.pathname === '/myprofile' ? "visible" : "invisible"} mt-2 btn btn-warning col-2 color-white`}>*/}
-                    {/*    <Link to="/" className="color-white">Log out</Link>*/}
-                    {/*</div>*/}
-
 
                 </div>
             </div>

@@ -4,7 +4,7 @@ import Service from "../service";
 
 const service = new Service();
 
-const stateToPropertyMapper = (state) => ({
+const stateToPropertyMapper = (state) => console.log("signin", state.SignInReducer) || ({
     user: state.SignInReducer.user,
     loggedIn: state.SignInReducer.loggedIn,
     loggedInFail: state.SignInReducer.loggedInFail

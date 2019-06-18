@@ -144,9 +144,11 @@ class UserProfile extends React.Component {
                         className="btn btn-danger ml-2">delete
                     </button>
 
-                    <button onClick={() => this.setState({editStoryMode: true})} className="btn btn-info ">edit</button>
+                    <button onClick={() => this.setState({editStoryMode: true})} className="btn btn-info ml-1">edit</button>
 
-                    <input onChange={e => this.setState({newStoryTitle: e.currentTarget.value})}
+                    <input
+                        className="ml-3"
+                        onChange={e => this.setState({newStoryTitle: e.currentTarget.value})}
                            value={this.state.newStoryTitle}
                            placeholder="New Story Title"
                     />
@@ -159,7 +161,20 @@ class UserProfile extends React.Component {
                 </ul>
 
             } else {
-                storylist = <div className="mt-5">Current user has no written any stories yet.</div>
+                storylist = <div className="mt-5">Current user has no written any stories yet.
+                    <input
+                        className="ml-1"
+                        onChange={e => this.setState({newStoryTitle: e.currentTarget.value})}
+                        value={this.state.newStoryTitle}
+                        placeholder="New Story Title"
+                    />
+                    <button className='btn btn-warning'
+                            onClick={this.createStory}
+                    >
+                        Create New
+                    </button>
+                </div>
+
             }
 
             return (
@@ -292,7 +307,10 @@ class UserProfile extends React.Component {
                             <h3 className="col-6">
                                 Saved BookList:
                             </h3>
-                                <button onClick={this.props.findAllBooksByUserId(this.props.user.id)} className="invisible">refresh</button>
+                                <button
+                                    onClick={() => this.props.findAllBooksByUserId(this.props.user.id)}
+                                    className="btn btn-info mb-2">refresh
+                                </button>
                             </div>
                             {booklist}
                         </div>}
