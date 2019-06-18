@@ -132,7 +132,7 @@ class UserProfile extends React.Component {
                                 {this.state.editStoryMode&&(this.state.selectedStory === story) ?
                                     <input
                                         onChange={e => this.setState({storyTitle: e.currentTarget.value})}
-                                        value={this.state.storyTitle}
+                                        // value={this.state.storyTitle}
                                         type="text"
                                         placeholder={story.title}/> :
                                     story.title}
