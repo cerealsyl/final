@@ -124,7 +124,10 @@ class UserProfile extends React.Component {
             if (this.props.stories.length !== 0) {
                 storylist = <ul className="nav nav-pills">
                     {this.props.stories.map((story, index) =>
-                        <li onClick={() => this.setState({selectedStory: story, storyBody: story.story})} key={index}
+                        <li onClick={() =>
+                            this.setState(
+                                {selectedStory: story, storyBody: story.story, storyTitle: story.title})}
+                            key={index}
                             className="nav-item">
                             <a className={`nav-link color-black ${this.state.selectedStory === story ? "active" : ""}`}
                                href="#">
@@ -132,9 +135,9 @@ class UserProfile extends React.Component {
                                 {this.state.editStoryMode&&(this.state.selectedStory === story) ?
                                     <input
                                         onChange={e => this.setState({storyTitle: e.currentTarget.value})}
-                                        // value={this.state.storyTitle}
+                                        value={this.state.storyTitle}
                                         type="text"
-                                        placeholder={story.title}/> :
+                                        placeholder="New Title"/> :
                                     story.title}
 
                             </a>
