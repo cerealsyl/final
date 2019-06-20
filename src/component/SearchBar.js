@@ -25,7 +25,7 @@ class SearchBar extends React.Component {
 
         if(this.state.searchType) {
             if(this.state.searchType === "story") {
-                return fetch("/api/stories", {
+                return fetch("https://hidden-earth-39973.herokuapp.com/api/stories", {
                     method: "POST",
                     body:JSON.stringify(this.state.keyword),
                     headers: {
