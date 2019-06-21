@@ -4,17 +4,19 @@ import Service from '../service'
 
 const service = new Service();
 
-const stateToProperty = (state) => ({
-    stories: state.SearchBarReducer.stories
+const stateToProperty = (state) => console.log(state.SearchBarReducer) ||({
+    stories: state.SearchBarReducer.stories,
+    books: state.SearchBarReducer.books,
+    message: state.SearchBarReducer.message
 
 })
 
 const dispatchToProperty = (dispatch) => ({
-    searchShortStory: (keyword) => {
+    searchStory: (keyword) => {
         dispatch({
             type: "SEARCH_STORY_PENDING"
         })
-        service.searchShortStory(keyword)
+        service.searchStory(keyword)
             .then(response =>{
                 dispatch({
                     type: "SEARCH_STORY_FULFILLED",
@@ -30,6 +32,25 @@ const dispatchToProperty = (dispatch) => ({
 
             })
 
+    },
+
+    fetchBooks: (keyword) => {
+        dispatch({
+            type: "SEARCH_BOOKS_PENDING"
+        })
+        service.fetchBooks(keyword)
+            .then(json => {
+                dispatch({
+                    type: "SEARCH_BOOKS_FULFILLED",
+                    data: json.items
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "SEARCH_BOOKS_REJECTED",
+                    err: err
+                })
+            })
     }
 
 

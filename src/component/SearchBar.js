@@ -7,6 +7,8 @@ class SearchBar extends React.Component {
         this.state = {
             keyword: "",
             searchType: "",
+            books: null,
+            stories: null
         }
     }
 
@@ -14,40 +16,20 @@ class SearchBar extends React.Component {
     keywordChanged = event =>
         this.setState({keyword: event.target.value})
 
-    proxyUrl = 'https://secure-garden-16347.herokuapp.com/'
-    BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=intitle:'
 
     searchBooks = () => {
-        this.setState({
-            books: null,
-            story: null
-        })
+        // this.setState({
+        //     books: null,
+        //     stories: null
+        // })
 
         if(this.state.searchType) {
             if(this.state.searchType === "story") {
-                return fetch("https://hidden-earth-39973.herokuapp.com/api/stories", {
-                    method: "POST",
-                    body:JSON.stringify(this.state.keyword),
-                    headers: {
-                        'content-type' : 'application/json'
-                    }
-                })
-                    .then(response => response.json())
-                    .then(json => this.renderStories(json))
+                this.props.searchStory(this.state.keyword)
+
 
             }else {
-
-                return fetch((this.proxyUrl + this.BASE_URL + this.state.keyword), {
-                    // mode: 'no-cors',
-                    method: 'GET',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Credentials': true,
-                        'Access-Control-Allow-Methods': 'POST, GET'
-                    }
-                })
-                    .then(response => response.json())
-                    .then(response => this.renderBooks(response))
+                this.props.fetchBooks(this.state.keyword)
             }
         }else{
             alert("Please choose a search type.")
@@ -57,6 +39,15 @@ class SearchBar extends React.Component {
     }
 
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("here")
+        if(prevProps !== this.props) {
+            this.setState({
+                books: this.props.books,
+                stories: this.props.stories
+            })
+        }
+    }
 
     searchType = e => {
         this.setState({
@@ -64,61 +55,83 @@ class SearchBar extends React.Component {
         })
     }
 
-    renderBooks = (response) =>
-        this.setState({books: response.items})
 
-    renderStories = (json) =>
-        this.setState({stories: json})
 
     render() {
+        let message = "";
+
         let display = ""
         if(this.state.searchType && this.state.searchType === "story"  && this.state.stories) {
-            if(this.state.stories.length === 0) {
+            if(this.props.message === null){
+                if(this.state.stories.length === 0) {
+                    display = <div className="col-5 mt-5">
+                        Not result found, please search a different keyword.
+                    </div>
+                }else{
+                    display =
+                        <div className="col-5 mt-5">
+                            {message}
+                            <ul className="list-group">
+                                {
+                                    this.state.stories.map(
+                                        (story,index) =>
+                                            <li key={index}
+                                                className='list-group-item'>
+                                                <Link to={`/search/story/${story.storyId}`}>{story.title}</Link>
+                                            </li>
+                                    )
+                                }
+                            </ul>
+
+                        </div>
+
+                }
+            }else {
+
                 display = <div className="col-5 mt-5">
-                    Not result found, please search a different keyword.
+                    {this.props.message}
                 </div>
+
+            }
+
+        }else if(this.state.searchType && this.state.searchType === "book"){
+            if(this.props.message === null) {
+                if(this.state.books === undefined) {
+                    display = <div className="col-5 mt-5">No result found</div>
+                }else if(this.state.books){
+                    if(this.state.books.length === 0) {
+                        display = <div className="col-5 mt-5">
+                            Not result found, please search a different keyword.
+                        </div>
+                    }else{
+                        console.log(this.props.message)
+                        display =
+                            <div className="col-5 mt-5">
+                                {message}
+                                <ul className="list-group">
+                                    {
+                                        this.state.books.map(
+                                            (book,index) =>
+                                                <li key={index}
+                                                    className='list-group-item'>
+                                                    <Link to={`/search/book/${book.id}`}>{book.volumeInfo.title}</Link>
+                                                </li>
+                                        )
+                                    }
+                                </ul>
+
+                            </div>
+                    }
+                }
+
             }else{
                 display =
                     <div className="col-5 mt-5">
-                        <ul className="list-group">
-                            {
-                                this.state.stories.map(
-                                    (story,index) =>
-                                        <li key={index}
-                                            className='list-group-item'>
-                                            <Link to={`/search/story/${story.storyId}`}>{story.title}</Link>
-                                        </li>
-                                )
-                            }
-                        </ul>
-
+                        {this.props.message}
                     </div>
 
             }
 
-        }else if(this.state.searchType && this.state.searchType === "book" && this.state.books){
-            if(this.state.books.length === 0) {
-                display = <div className="col-5 mt-5">
-                    Not result found, please search a different keyword.
-                </div>
-            }else{
-                display =
-                    <div className="col-5 mt-5">
-
-                        <ul className="list-group">
-                            {
-                                this.state.books.map(
-                                    (book,index) =>
-                                        <li key={index}
-                                            className='list-group-item'>
-                                            <Link to={`/search/book/${book.id}`}>{book.volumeInfo.title}</Link>
-                                        </li>
-                                )
-                            }
-                        </ul>
-
-                    </div>
-            }
         }
         return (
             <div className="container">
@@ -139,12 +152,22 @@ class SearchBar extends React.Component {
                         </div>
                         <div className="row mt-2">
                             <label htmlFor="select-2">
-                            <input onChange={e=>this.searchType(e)} type="radio" name="dbSelect" id="select-2" value="story"/>search for short story
+                            <input
+                                onChange={e=>this.searchType(e)}
+                                type="radio"
+                                name="dbSelect"
+                                id="select-2"
+                                value="story"/>Search for short story
                             </label>
 
                             <div className="col-1"></div>
                             <label htmlFor="select-1">
-                                <input onChange={e=>this.searchType(e)} type="radio" name="dbSelect" id="select-1" value="book"/>Search for books
+                                <input
+                                    onChange={e=>this.searchType(e)}
+                                    type="radio"
+                                    name="dbSelect"
+                                    id="select-1"
+                                    value="book"/>Search for books
                             </label>
 
                         </div>

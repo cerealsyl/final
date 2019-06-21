@@ -10,6 +10,9 @@ let story = '/api/stories/STORY_ID'
 let userStory = '/api/users/USER_ID/stories/STORY_ID'
 let userBook = '/api/books/BOOK_TITLE/users'
 
+let proxyUrl = 'https://secure-garden-16347.herokuapp.com/'
+let BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=intitle:'
+
 
 
 export default class Service {
@@ -26,6 +29,18 @@ export default class Service {
 
 
     };
+
+    fetchBooks = (keyword) => {
+        return fetch((proxyUrl + BASE_URL + keyword), {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Methods': 'POST, GET'
+            }
+        })
+            .then(response => response.json())
+    }
 
     createUser = (user) => {
         return fetch(URL+ users, {
@@ -45,8 +60,8 @@ export default class Service {
             })
     };
 
-    searchShortStory = (keyword) => {
-        return fetch(URL+ stories, {
+    searchStory = (keyword) => {
+        return fetch(URL + "/api/stories", {
             method: "POST",
             body: JSON.stringify(keyword),
             headers: {
