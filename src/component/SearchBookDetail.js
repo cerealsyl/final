@@ -36,7 +36,7 @@ class SearchBookDetail extends React.Component {
 
     addBookToList = () => {
         if(!this.props.user) {
-            this.props.history.push('/sign-in')
+            this.props.history.push('/login')
         }else{
             const newBook = {
                 title: this.state.book.volumeInfo.title
@@ -105,11 +105,6 @@ class SearchBookDetail extends React.Component {
                         <img src={this.state.book.volumeInfo.imageLinks.small} alt='image not found'/>
                         </div>
                         <div className="row">
-                            {/*<button*/}
-                            {/*    onClick={this.addBookToList}*/}
-                            {/*    className={`${this.state.user.role === "WRITER"? "invisible" : "visible"}mt-3 btn btn-info col-5`}>*/}
-                            {/*    Add to Booklist*/}
-                            {/*</button>*/}
                             {button}
                             <div className="col-2"></div>
                                 <a className="col-5 mt-4" href={this.state.book.accessInfo.webReaderLink}>Read Online</a>

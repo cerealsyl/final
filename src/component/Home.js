@@ -32,7 +32,7 @@ class Home extends React.Component {
                 <div className="container-fluid bg-bk w-100 h-100">
                     <HeaderContainer/>
                     <Route exact path="/" component={SearchBarContainer}/>
-                    <Route path="/sign-in" component={SignInContainer}/>
+                    <Route path="/login" component={SignInContainer}/>
                     <Route path="/register" component={SignUpContainer}/>
                     <Route path='/myprofile' component={UserProfileContainer}/>
                     <Route path='/profile/:userId' component={UserProfilePublicContainer}/>

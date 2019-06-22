@@ -98,7 +98,7 @@ class UserProfile extends React.Component {
 
         if (!this.props.user) {
             return <div className="row text-center">
-                <Link className="ml-50" to='/sign-in'>
+                <Link className="ml-50" to='/login'>
                     <div className="color-black mt-5">Click me to sign in</div>
                 </Link>
             </div>

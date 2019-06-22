@@ -86,7 +86,7 @@ class SignUp extends React.Component {
             errorMessage = <div className="alert alert-danger text-center mt-5" role="alert">{this.props.fail}</div>
         }else if (this.props.success) {
             setTimeout(() => {
-                this.props.history.push('/sign-in')
+                this.props.history.push('/login')
                 this.props.reset();
             }, 500)
 
@@ -134,7 +134,7 @@ class SignUp extends React.Component {
 
                     <button onClick={this.handleSubmit} type="submit" className="mt-2">Create</button>
                     <div className="mt-2">Already a bookie
-                        <Link to="/sign-in"> Log in!</Link>
+                        <Link to="/login"> Log in!</Link>
                     </div>
 
                 </form>

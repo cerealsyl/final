@@ -17,7 +17,7 @@ class Header extends React.Component {
         if (window.location.pathname !== '/myprofile' && this.props.user === null) {
             display =
                 <div className="row">
-                    <Link to="/sign-in" className="mt-2 btn btn-success col-3 color-white">Sign In</Link>
+                    <Link to="/login" className="mt-2 btn btn-success col-3 color-white">Sign In</Link>
                     <Link to="/register" className="mt-2 ml-2 btn btn-success col-3 color-white">Sign up</Link>
                 </div>
         } else if (this.props.user !== null) {
